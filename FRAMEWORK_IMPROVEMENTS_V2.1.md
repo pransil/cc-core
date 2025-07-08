@@ -15,12 +15,12 @@ This document captures the improvements made to the Claude Code Automation Frame
 **Implementation**:
 ```python
 # Framework Standard
-timestamp = datetime.now().strftime('%Y-%m-%d-%H:%M')
+timestamp = datetime.now().strftime('%Y-%m-%d_%H-%M')
 
 # Examples
-training_results_2025-06-27-12:30.csv
-model_plot_2025-06-27-12:30.png
-test_report_2025-06-27-12:30.txt
+training_results_2025-06-27_12-30.csv
+model_plot_2025-06-27_12-30.png
+test_report_2025-06-27_12-30.txt
 ```
 
 **Files Updated**:
@@ -30,32 +30,7 @@ test_report_2025-06-27-12:30.txt
 - `train_real_mnist.py`
 - `simple_train_demo.py`
 
-### 2. **User Interaction Protocol**
-
-**Problem**: No clear notification when user input was needed or when data fallbacks occurred.
-
-**Solution**: Audio notifications and explicit consent for data fallbacks.
-
-**Implementation**:
-```python
-# Single bell for input requests
-echo -e "\a"
-
-# Triple bell warning for data fallbacks
-echo -e "\a\a\a"
-
-# Clear warnings
-print("⚠️ REAL DATA NOT AVAILABLE: {reason}")
-print("🔔🔔🔔 DATA FALLBACK WARNING!")
-```
-
-**New Utility**: `mnist_classifier/utils/notifications.py`
-- `ring_bell(count)` - Audio notifications
-- `prompt_with_bell(message)` - Input with audio
-- `data_fallback_warning(reason)` - Data fallback protocol
-- `confirm_action(message)` - Confirmation dialogs
-
-### 3. **Enhanced Visualization Standards**
+### 2. **Enhanced Visualization Standards**
 
 **Problem**: Plots lacked clear identification and blocked execution.
 
@@ -121,7 +96,7 @@ plt.savefig(plot_path, dpi=300, bbox_inches='tight')
 
 | Aspect | Before | After |
 |--------|--------|--------|
-| **Timestamps** | `20250627_094302` | `2025-06-27-12:30` |
+| **Timestamps** | `20250627_094302` | `2025-06-27_12-30` |
 | **User Input** | Silent prompts | 🔔 Audio + visual |
 | **Data Fallbacks** | Automatic synthetic | ⚠️ Warning + user consent |
 | **Plot Titles** | Generic | Model-specific identification |
@@ -130,7 +105,7 @@ plt.savefig(plot_path, dpi=300, bbox_inches='tight')
 
 ### Framework Benefits
 
-1. **Improved User Experience**: Clear audio/visual feedback for all interactions
+1. **Improved User Experience**: Clear audio/visual feedback for all interactions (audio did not work!)
 2. **Better File Management**: Consistent, readable timestamp format
 3. **Enhanced Safety**: No silent data substitutions without user consent
 4. **Professional Visualizations**: Clear model identification and automatic archiving
@@ -142,12 +117,12 @@ plt.savefig(plot_path, dpi=300, bbox_inches='tight')
 
 1. **Copy Templates**: Use updated templates from `templates/utils/`
 2. **Follow Standards**: Implement timestamp format, notifications, and plotting standards
-3. **Test Integration**: Verify audio notifications and file naming work correctly
+3. **Test Integration**: Verify audio (not working) notifications and file naming work correctly
 
 ### For Existing Projects
 
 1. **Update Timestamps**: Replace all `strftime` calls with `%Y-%m-%d-%H:%M` format
-2. **Add Notifications**: Import and use notification utilities for user interactions
+2. **Add Notifications**: Import and use notification utilities for user interactions (not working)
 3. **Enhance Plots**: Add model titles and automatic saving to existing visualization code
 
 ## 📝 Code Examples
@@ -157,7 +132,7 @@ plt.savefig(plot_path, dpi=300, bbox_inches='tight')
 from datetime import datetime
 
 # Framework Standard
-timestamp = datetime.now().strftime('%Y-%m-%d-%H:%M')
+timestamp = datetime.now().strftime('%Y-%m-%d_%H-%M')
 filename = f"results_{timestamp}.csv"
 ```
 
@@ -170,7 +145,7 @@ if not real_data_available:
     if not data_fallback_warning("Dataset not found"):
         return  # User chose to stop
 
-# Input with audio notification
+# Input with audio notification (not working)
 model_type = prompt_with_bell("Select model type: ")
 ```
 
