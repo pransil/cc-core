@@ -19,15 +19,7 @@ Interactive wizard for creating new projects with appropriate templates and tech
 # From calculator example
 python test/run_tests.py
 ```
-Generates timestamped test reports in `test/reports/test_results_YYYY-MM-DD-HH:MM.txt`.
-
-### User Interaction & Data Handling
-```bash
-# Bell notifications for user input
-echo -e "\a"  # Single bell for input requests
-echo -e "\a\a\a"  # Triple bell for data fallback warnings
-```
-All user interactions include audio notifications and clear data fallback warnings.
+Generates timestamped test reports in `test/reports/test_results_YYYY-MM-DD_HH-MM.txt`.
 
 ### Development Setup (varies by tech stack)
 ```bash
@@ -50,18 +42,19 @@ The framework follows a **6-phase systematic approach**:
 
 1. **Project Initialization**: Use project wizard to select application type and tech stack
 2. **Requirements Definition**: Generate comprehensive PRD from domain-specific templates
-3. **Development Planning**: Break down into TodoWrite tasks with clear deliverables
+3. **Development Planning**: Break down PRD into clear and concise TodoWrite tasks with clear deliverables
 4. **Implementation**: Code with built-in quality standards and patterns
-5. **Testing**: Multi-level testing with timestamped reports (>80% coverage required)
-6. **Documentation**: Generate user and developer guides
+5. **Testing**: Multi-level (uniit, integration, system) testing with timestamped reports (>80% coverage required)
+6. **Documentation**: Generate user and developer guides. The developer guide should include an architectural overview
 
 ### Directory Structure Pattern
 All projects follow this structure:
 ```
 {project_name}/
-├── deliverables/           # All project outputs
+├── deliverables/          # All project outputs
 │   ├── PRD.md             # Project Requirements Document  
 │   ├── src/               # Source code
+│   ├── data/              # Data files
 │   ├── test/              # Test code and reports
 │   ├── docs/              # Documentation
 │   └── requirements.txt   # Dependencies
@@ -90,7 +83,7 @@ All projects follow this structure:
 | **Web Apps** | `web_app_prd_template.md` | React+Python, Vue+Node | Jest, pytest |
 | **REST APIs** | `api_service_prd_template.md` | FastAPI, Express | pytest, supertest |
 | **CLI Tools** | `cli_tool_prd_template.md` | Python Click | pytest + click.testing |
-| **ML Systems** | `ml_system_prd_template.md` | scikit-learn, TensorFlow | pytest + model validation |
+| **ML Systems** | `ml_system_prd_template.md` | scikit-learn, PyTorch | pytest + model validation |
 | **Trading Dashboards** | `trading_dashboard_prd_template.md` | Streamlit, React+D3 | pytest + financial calculations |
 | **Desktop Apps** | Example: calculator | PyQt6, Electron | pytest + GUI testing |
 
@@ -111,27 +104,21 @@ All projects follow this structure:
 ### Framework Enhancements (v2.1)
 
 #### **Timestamp Standards**
-- **Format**: All timestamps use `YYYY-MM-DD-HH:mm` format
-- **Files**: `training_results_2025-06-27-12:30.csv`, `model_plot_2025-06-27-12:30.png`
-- **Code**: Use `datetime.now().strftime('%Y-%m-%d-%H:%M')` consistently
-
-#### **User Interaction Protocol**
-- **Input Requests**: Always ring bell (`echo -e "\a"`) when asking for user input
-- **Data Fallbacks**: Triple bell warning (`echo -e "\a\a\a"`) + explicit user consent required
-- **Clear Notifications**: "⚠️ REAL DATA NOT AVAILABLE" + "🔔🔔🔔 DATA FALLBACK WARNING!"
-- **User Control**: Always provide option to stop execution instead of using fallback data
+- **Format**: All timestamps use `YYYY-MM-DD_HH-mm` format
+- **Files**: `training_results_2025-06-27_12-30.csv`, `model_plot_2025-06-27_12-30.png`
+- **Code**: Use `datetime.now().strftime('%Y-%m-%d_%H-%M')` consistently
 
 #### **Visualization Standards**
-- **Plot Titles**: Always include model name in main title (`fig.suptitle(f'{model_name} Training Progress')`)
+- **Plot Titles**: Always include model name and a "DD-HH-mm" timestamp in main title (`fig.suptitle(f'{model_name} Training Progress')`)
 - **Auto-Save**: All plots automatically saved with timestamps
-- **Non-Blocking**: Use `plt.show(block=False)` to prevent execution halts
+- **Non-Blocking**: Use `plt.show(block=False)` to prevent execution halts after a plot is shown
 - **File Naming**: `{model_name}_{plot_type}_{timestamp}.png`
 
 ### Architecture Patterns
 - **Template-Driven Development**: Use existing templates rather than starting from scratch
 - **Domain-Specific Guidance**: Different application types have different requirements
 - **Quality by Design**: Built-in standards prevent common mistakes
-- **Systematic over Ad-hoc**: Follow the 6-phase workflow to eliminate decision paralysis
+- **Systematic over Ad-hoc**: Follow the 6-phase workflow (outlined above) to eliminate decision paralysis
 
 ## Technology Stack Profiles
 
