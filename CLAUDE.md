@@ -109,7 +109,7 @@ All projects follow this structure:
 - **Code**: Use `datetime.now().strftime('%Y-%m-%d_%H-%M')` consistently
 
 #### **Visualization Standards**
-- **Plot Titles**: Always include model name and a "DD-HH-mm" timestamp in main title (`fig.suptitle(f'{model_name} Training Progress')`)
+- **Plot Titles**: Always include model name and a "DD_HH-mm" timestamp in main title (`fig.suptitle(f'{model_name} Training Progress')`)
 - **Auto-Save**: All plots automatically saved with timestamps
 - **Non-Blocking**: Use `plt.show(block=False)` to prevent execution halts after a plot is shown
 - **File Naming**: `{model_name}_{plot_type}_{timestamp}.png`
